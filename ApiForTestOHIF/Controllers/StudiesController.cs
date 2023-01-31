@@ -27,7 +27,8 @@ namespace ApiForTestOHIF.Controllers
             HttpContext.Response.Headers.Add("Content-Encoding", "gzip");
             HttpContext.Response.ContentType = "application/dicom+json";
             //HttpContext.Response.ContentLength = json.Length;
-            return new JsonStringResult(json);
+            var res =  new JsonStringResult(json);
+            return res;
             //return Ok(Compress(json)); //Kompresja string do GZIP
         }
 
