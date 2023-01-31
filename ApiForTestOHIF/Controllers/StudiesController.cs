@@ -26,7 +26,7 @@ namespace ApiForTestOHIF.Controllers
             HttpContext.Response.ContentType = "application/dicom+json";
             //HttpContext.Response.ContentLength = json.Length;
             return Ok(json);
-            //return Ok(Compress(json));
+            //return Ok(Compress(json)); //Kompresja string do GZIP
         }
 
         private static byte[] Compress(string s)
@@ -36,10 +36,8 @@ namespace ApiForTestOHIF.Controllers
             using (GZipStream zipStream = new GZipStream(ms, CompressionMode.Compress))
             {
                 zipStream.Write(b, 0, b.Length);
-                zipStream.Flush(); //Doesn't seem like Close() is available in UWP, so I changed it to Flush(). Is this the problem?
+                zipStream.Flush();
             }
-
-            // we create the data array here once the GZIP stream has been disposed
             var data = ms.ToArray();
             ms.Dispose();
             return data;
