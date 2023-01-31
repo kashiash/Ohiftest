@@ -24,7 +24,7 @@ namespace ApiForTestOHIF.Controllers
             //HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
             //HttpContext.Response.Headers.Add("Strict-Transport-Security", "max-age=15724800; includeSubDomains");
             //HttpContext.Response.Headers.Add("Accept-Encoding", "");
-            HttpContext.Response.Headers.Add("Content-Encoding", "gzip");
+         //   HttpContext.Response.Headers.Add("Content-Encoding", "gzip");
             HttpContext.Response.ContentType = "application/dicom+json";
             //HttpContext.Response.ContentLength = json.Length;
             var res =  new JsonStringResult(json);
