@@ -24,10 +24,10 @@ namespace ApiForTestOHIF.Controllers
             //HttpContext.Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
             //HttpContext.Response.Headers.Add("Strict-Transport-Security", "max-age=15724800; includeSubDomains");
             //HttpContext.Response.Headers.Add("Accept-Encoding", "");
-            //HttpContext.Response.Headers.Add("Content-Encoding", "gzip");
+            HttpContext.Response.Headers.Add("Content-Encoding", "gzip");
             HttpContext.Response.ContentType = "application/dicom+json";
             //HttpContext.Response.ContentLength = json.Length;
-            return Ok(json);
+            return new JsonStringResult(json);
             //return Ok(Compress(json)); //Kompresja string do GZIP
         }
 
@@ -43,6 +43,16 @@ namespace ApiForTestOHIF.Controllers
             var data = ms.ToArray();
             ms.Dispose();
             return data;
+        }
+    }
+
+
+    public class JsonStringResult : ContentResult
+    {
+        public JsonStringResult(string json)
+        {
+            Content = json;
+            ContentType = "application/json";
         }
     }
 }
