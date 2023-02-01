@@ -69,16 +69,13 @@ namespace ApiForTestOHIF.Controllers
         [HttpGet]
         public ActionResult ReturnInstance(string StudyInstanceUID, string SeriesInstanceUID, string SOPInstanceUID)
         {
-            string json = "[]";
             var webReq = HttpWebRequest.Create($"https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs/studies/{StudyInstanceUID}/series/{SeriesInstanceUID}/instances/{SOPInstanceUID}/frames/1");
             webReq.Method = "GET";
-            using (var responseStream = webReq.GetResponse().GetResponseStream())
-            {
-                StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                json = reader.ReadToEnd();                
-            }
-            var res = new JsonStringResult(json);
-            return res;
+            var resp = webReq.GetResponse();
+            Stream input = resp.GetResponseStream();
+            MemoryStream ms = new MemoryStream();
+            input.CopyTo(ms);
+            return File(ms.ToArray(), @"application/octet-stream");
         }
     }
 
