@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.IO.Compression;
+using System.Net;
 using System.Text;
 
 namespace ApiForTestOHIF.Controllers
@@ -36,7 +37,14 @@ namespace ApiForTestOHIF.Controllers
         [HttpGet]
         public ActionResult SearchForSeries(string StudyInstanceUID)
         {
-            string json = "[{\"00080005\":{\"vr\":\"CS\",\"Value\":[\"ISO_IR 100\"]},\"00080054\":{\"vr\":\"AE\",\"Value\":[\"DCM4CHEE\"]},\"00080056\":{\"vr\":\"CS\",\"Value\":[\"ONLINE\"]},\"00080060\":{\"vr\":\"CS\",\"Value\":[\"CT\"]},\"0008103E\":{\"vr\":\"LO\",\"Value\":[\"SCOUT\"]},\"00081190\":{\"vr\":\"UR\",\"Value\":[\"http://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs/studies/1.3.6.1.4.1.14519.5.2.1.7009.2403.871108593056125491804754960339/series/1.3.6.1.4.1.14519.5.2.1.7009.2403.168353129945747450419572751964\"]},\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"1.3.6.1.4.1.14519.5.2.1.7009.2403.871108593056125491804754960339\"]},\"0020000E\":{\"vr\":\"UI\",\"Value\":[\"1.3.6.1.4.1.14519.5.2.1.7009.2403.168353129945747450419572751964\"]},\"00200011\":{\"vr\":\"IS\",\"Value\":[\"1\"]},\"00201209\":{\"vr\":\"IS\",\"Value\":[\"1\"]},\"00400244\":{\"vr\":\"DA\",\"Value\":[\"19600116\"]},\"00400245\":{\"vr\":\"TM\",\"Value\":[\"082433\"]}},{\"00080005\":{\"vr\":\"CS\",\"Value\":[\"ISO_IR 100\"]},\"00080054\":{\"vr\":\"AE\",\"Value\":[\"DCM4CHEE\"]},\"00080056\":{\"vr\":\"CS\",\"Value\":[\"ONLINE\"]},\"00080060\":{\"vr\":\"CS\",\"Value\":[\"CT\"]},\"0008103E\":{\"vr\":\"LO\",\"Value\":[\"CT IMAGES\"]},\"00081190\":{\"vr\":\"UR\",\"Value\":[\"http://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs/studies/1.3.6.1.4.1.14519.5.2.1.7009.2403.871108593056125491804754960339/series/1.3.6.1.4.1.14519.5.2.1.7009.2403.367700692008930469189923116409\"]},\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"1.3.6.1.4.1.14519.5.2.1.7009.2403.871108593056125491804754960339\"]},\"0020000E\":{\"vr\":\"UI\",\"Value\":[\"1.3.6.1.4.1.14519.5.2.1.7009.2403.367700692008930469189923116409\"]},\"00200011\":{\"vr\":\"IS\",\"Value\":[\"2\"]},\"00201209\":{\"vr\":\"IS\",\"Value\":[\"311\"]},\"00400244\":{\"vr\":\"DA\",\"Value\":[\"19600116\"]},\"00400245\":{\"vr\":\"TM\",\"Value\":[\"082433\"]}},{\"00080005\":{\"vr\":\"CS\",\"Value\":[\"ISO_IR 100\"]},\"00080054\":{\"vr\":\"AE\",\"Value\":[\"DCM4CHEE\"]},\"00080056\":{\"vr\":\"CS\",\"Value\":[\"ONLINE\"]},\"00080060\":{\"vr\":\"CS\",\"Value\":[\"PT\"]},\"0008103E\":{\"vr\":\"LO\",\"Value\":[\"PET NAC\"]},\"00081190\":{\"vr\":\"UR\",\"Value\":[\"http://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs/studies/1.3.6.1.4.1.14519.5.2.1.7009.2403.871108593056125491804754960339/series/1.3.6.1.4.1.14519.5.2.1.7009.2403.163066661055228905323984189931\"]},\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"1.3.6.1.4.1.14519.5.2.1.7009.2403.871108593056125491804754960339\"]},\"0020000E\":{\"vr\":\"UI\",\"Value\":[\"1.3.6.1.4.1.14519.5.2.1.7009.2403.163066661055228905323984189931\"]},\"00200011\":{\"vr\":\"IS\",\"Value\":[\"2\"]},\"00201209\":{\"vr\":\"IS\",\"Value\":[\"311\"]}},{\"00080005\":{\"vr\":\"CS\",\"Value\":[\"ISO_IR 100\"]},\"00080054\":{\"vr\":\"AE\",\"Value\":[\"DCM4CHEE\"]},\"00080056\":{\"vr\":\"CS\",\"Value\":[\"ONLINE\"]},\"00080060\":{\"vr\":\"CS\",\"Value\":[\"PT\"]},\"0008103E\":{\"vr\":\"LO\",\"Value\":[\"PET AC\"]},\"00081190\":{\"vr\":\"UR\",\"Value\":[\"http://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs/studies/1.3.6.1.4.1.14519.5.2.1.7009.2403.871108593056125491804754960339/series/1.3.6.1.4.1.14519.5.2.1.7009.2403.780462962868572737240023906400\"]},\"0020000D\":{\"vr\":\"UI\",\"Value\":[\"1.3.6.1.4.1.14519.5.2.1.7009.2403.871108593056125491804754960339\"]},\"0020000E\":{\"vr\":\"UI\",\"Value\":[\"1.3.6.1.4.1.14519.5.2.1.7009.2403.780462962868572737240023906400\"]},\"00200011\":{\"vr\":\"IS\",\"Value\":[\"1\"]},\"00201209\":{\"vr\":\"IS\",\"Value\":[\"311\"]}}]";
+            string json = "[]";
+            var webReq = HttpWebRequest.Create($"https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs/studies/{StudyInstanceUID}/series");
+            webReq.Method = "GET";
+            using (var responseStream = webReq.GetResponse().GetResponseStream())
+            {
+                StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                json = reader.ReadToEnd();
+            }
             var res = new JsonStringResult(json);
             return res;
         }
