@@ -22,7 +22,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-app.UseHealthChecks(path: "health");
+app.UseHealthChecks(path: "/health");
 
 app.UseCors(builder => builder
 .AllowAnyHeader()
