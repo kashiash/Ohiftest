@@ -48,6 +48,22 @@ namespace ApiForTestOHIF.Controllers
             var res = new JsonStringResult(json);
             return res;
         }
+
+        [Route("aets/{AeTitle}/rs/studies/{StudyInstanceUID}/series/{SeriesInstanceUID}/metadata")]
+        [HttpGet]
+        public ActionResult SearchForInstance(string StudyInstanceUID, string SeriesInstanceUID)
+        {
+            string json = "[]";
+            var webReq = HttpWebRequest.Create($"https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs/studies/{StudyInstanceUID}/series/{SeriesInstanceUID}/metadata");
+            webReq.Method = "GET";
+            using (var responseStream = webReq.GetResponse().GetResponseStream())
+            {
+                StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                json = reader.ReadToEnd();
+            }
+            var res = new JsonStringResult(json);
+            return res;
+        }
     }
 
 
