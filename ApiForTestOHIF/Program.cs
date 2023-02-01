@@ -7,10 +7,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -21,6 +22,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseHealthChecks("/health");
 
 app.UseCors(builder => builder
 .AllowAnyHeader()
