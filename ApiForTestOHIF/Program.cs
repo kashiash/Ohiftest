@@ -1,5 +1,7 @@
 using ApiForTestOHIF;
+using ApiForTestOHIF.Factories;
 using ApiForTestOHIF.Services;
+using ApiForTestOHIF.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +20,14 @@ builder.Services.AddScoped<IObjectArchieveQueryService, ObjectArchieveQueryServi
 builder.Services.AddScoped<IOhifService, OhifService>();
 builder.Services.AddScoped<IQueryOptions, QueryOptions>();
 builder.Services.AddScoped<IRetrieveUrlProvider, RetrieveUrlProvider>();
-//builder.Services.AddScoped<IQueryOptions, QueryOptions>();
+builder.Services.AddScoped<IWadoRsService, WadoRsService>();
+builder.Services.AddScoped<IWadoUriService, WadoUriService>();
+builder.Services.AddScoped<IObjectRetrieveService, ObjectRetrieveService>();
+builder.Services.AddScoped<IDicomMediaIdFactory, DicomMediaIdFactory>();
+builder.Services.AddScoped<IDicomMediaWriterFactory, DicomMediaWriterFactory>();
+builder.Services.AddScoped<IMediaStorageService, FileStorageService>();
+
+
 
 var app = builder.Build();
 

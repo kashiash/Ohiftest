@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using System.Net;
+using ApiForTestOHIF.Models;
 
 namespace ApiForTestOHIF.Services
 {
@@ -17,7 +18,7 @@ namespace ApiForTestOHIF.Services
             //validation code should go in here
             if (null == request || string.Compare(request.RequestType, "WADO", true) != 0)
             {
-                throw new DCloudException("Request Type must be set to WADO");
+                throw new Exception("Request Type must be set to WADO");
             }
 
             List<MediaTypeHeaderValue> mediaTypeHeader = GetRequestedMimeType(request);
@@ -36,18 +37,18 @@ namespace ApiForTestOHIF.Services
 
                 if (null != dcmLocation && dcmLocation.Exists())
                 {
-                    if (DicomWebServerSettings.Instance.SupportPreSignedUrls && dcmLocation is IPreSignedUrlStorageLocation)
-                    {
-                        var expiry = DateTime.Now.AddHours(DicomWebServerSettings.Instance.PreSignedUrlReadExpiryTimeInHours);
-                        Uri locationUrl = ((IPreSignedUrlStorageLocation)dcmLocation).GetReadUrl(null, expiry);
-                        HttpResponseMessage msg = new HttpResponseMessage(HttpStatusCode.Redirect);
+                    //if (DicomWebServerSettings.Instance.SupportPreSignedUrls && dcmLocation is IPreSignedUrlStorageLocation)
+                    //{
+                    //    var expiry = DateTime.Now.AddHours(DicomWebServerSettings.Instance.PreSignedUrlReadExpiryTimeInHours);
+                    //    Uri locationUrl = ((IPreSignedUrlStorageLocation)dcmLocation).GetReadUrl(null, expiry);
+                    //    HttpResponseMessage msg = new HttpResponseMessage(HttpStatusCode.Redirect);
 
-                        msg.Headers.Location = locationUrl;
+                    //    msg.Headers.Location = locationUrl;
 
-                        return msg;
-                    }
-                    else
-                    {
+                    //    return msg;
+                    //}
+                    //else
+                    //{
                         StreamContent sc = new StreamContent(dcmLocation.GetReadStream());
                         sc.Headers.ContentType = new MediaTypeHeaderValue(mediaType.MediaType);
                         HttpResponseMessage msg = new HttpResponseMessage(HttpStatusCode.OK);
@@ -56,7 +57,7 @@ namespace ApiForTestOHIF.Services
 
                         return msg;
                     }
-                }
+              //  }
             }
 
             HttpResponseMessage responseMessage;

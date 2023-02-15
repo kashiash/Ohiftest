@@ -1,4 +1,6 @@
-﻿namespace ApiForTestOHIF.Services
+﻿using ApiForTestOHIF.Models;
+
+namespace ApiForTestOHIF.Services
 {
     public interface IWadoRsService
     {

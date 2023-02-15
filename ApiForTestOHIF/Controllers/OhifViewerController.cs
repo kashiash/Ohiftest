@@ -1,4 +1,5 @@
-﻿using ApiForTestOHIF.Services;
+﻿using ApiForTestOHIF.Models;
+using ApiForTestOHIF.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiForTestOHIF.Controllers
