@@ -1,6 +1,6 @@
 ﻿using ApiForTestOHIF.Models;
 
-namespace ApiForTestOHIF
+namespace ApiForTestOHIF.Services
 {
     public interface IRetrieveUrlProvider
     {

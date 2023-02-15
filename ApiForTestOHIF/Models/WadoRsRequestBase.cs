@@ -24,11 +24,19 @@ namespace ApiForTestOHIF.Models
 
     public class WadoRsStudiesRequest : WadoRsRequestBase, IWadoRsStudiesRequest
     {
+        public WadoRsStudiesRequest()
+        {
+
+        }
         public string StudyInstanceUID { get; set; }
     }
 
     public class WadoRsSeriesRequest : WadoRsStudiesRequest, IWadoRsSeriesRequest
     {
+        public WadoRsSeriesRequest()
+        {
+
+        }
         public string SeriesInstanceUID { get; set; }
     }
 

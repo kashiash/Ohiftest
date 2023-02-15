@@ -1,4 +1,4 @@
-﻿namespace ApiForTestOHIF
+﻿namespace ApiForTestOHIF.Dicoms
 {
     public interface IQueryOptions
     {

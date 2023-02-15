@@ -2,6 +2,7 @@
 using FellowOakDicom;
 using System.Net.Http.Headers;
 using ApiForTestOHIF.Models;
+using ApiForTestOHIF.Dicoms;
 
 namespace ApiForTestOHIF.Services
 {

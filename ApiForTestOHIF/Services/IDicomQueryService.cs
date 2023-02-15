@@ -1,6 +1,8 @@
-﻿using FellowOakDicom;
+﻿using ApiForTestOHIF.Dicoms;
+using ApiForTestOHIF.Models;
+using FellowOakDicom;
 
-namespace ApiForTestOHIF
+namespace ApiForTestOHIF.Services
 {
     public interface IDicomQueryService
     {

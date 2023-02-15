@@ -1,4 +1,4 @@
-﻿namespace ApiForTestOHIF
+﻿namespace ApiForTestOHIF.Models
 {
     public class PagedResult<T>
     {
@@ -16,7 +16,7 @@
             Result = subEntity;
 
             PageNumber = (int)Math.Floor((decimal)(Offset / PageSize) + 1);
-            NumberOfPages = (int)Math.Ceiling(((decimal)TotalCount / PageSize));
+            NumberOfPages = (int)Math.Ceiling((decimal)TotalCount / PageSize);
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
-﻿using FellowOakDicom;
+﻿using ApiForTestOHIF.Dicoms;
+using ApiForTestOHIF.Models;
+using FellowOakDicom;
 
 namespace ApiForTestOHIF.Services
 {
