@@ -1,3 +1,5 @@
+using ApiForTestOHIF;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +10,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 builder.Services.AddHealthChecks();
+
+
+
+builder.Services.AddScoped<IObjectArchieveQueryService, ObjectArchieveQueryService>();
+builder.Services.AddScoped<IOhifService, OhifService>();
+builder.Services.AddScoped<IQueryOptions, QueryOptions>();
+builder.Services.AddScoped<IRetrieveUrlProvider, RetrieveUrlProvider>();
+//builder.Services.AddScoped<IQueryOptions, QueryOptions>();
 
 var app = builder.Build();
 
