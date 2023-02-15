@@ -1,8 +1,9 @@
 ﻿using System.Net;
 using FellowOakDicom;
 using System.Net.Http.Headers;
+using ApiForTestOHIF.Models;
 
-namespace ApiForTestOHIF
+namespace ApiForTestOHIF.Services
 {
     public class OhifService : IOhifService
     {
@@ -162,7 +163,7 @@ namespace ApiForTestOHIF
                 {
                     ohifStudy = new OHIFStudy() { StudyInstanceUid = currentStudyUid };
 
-                    ohifStudy.PatientName = instance.GetSingleValueOrDefault<string>(DicomTag.PatientName, "");
+                    ohifStudy.PatientName = instance.GetSingleValueOrDefault(DicomTag.PatientName, "");
 
                     result.Studies.Add(ohifStudy);
 
@@ -173,7 +174,7 @@ namespace ApiForTestOHIF
                 {
                     ohifSeries = new OHIFSeries() { SeriesInstanceUid = currentSeriesUid };
 
-                    ohifSeries.SeriesDescription = instance.GetSingleValueOrDefault<string>(DicomTag.SeriesDescription, "");
+                    ohifSeries.SeriesDescription = instance.GetSingleValueOrDefault(DicomTag.SeriesDescription, "");
 
                     ohifStudy.SeriesList.Add(ohifSeries);
 

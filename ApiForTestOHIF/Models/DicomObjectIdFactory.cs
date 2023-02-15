@@ -1,6 +1,6 @@
 ﻿using FellowOakDicom;
 
-namespace ApiForTestOHIF
+namespace ApiForTestOHIF.Models
 {
     public class DicomObjectIdFactory
     {

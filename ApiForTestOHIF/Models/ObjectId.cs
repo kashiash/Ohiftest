@@ -1,4 +1,4 @@
-﻿namespace ApiForTestOHIF
+﻿namespace ApiForTestOHIF.Models
 {
     public class ObjectId : IObjectId
     {

@@ -1,4 +1,5 @@
 ﻿using ApiForTestOHIF;
+using ApiForTestOHIF.Services;
 using FellowOakDicom;
 
 internal class ObjectArchieveQueryService : IObjectArchieveQueryService

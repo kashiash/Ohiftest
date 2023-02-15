@@ -1,4 +1,6 @@
-﻿namespace ApiForTestOHIF
+﻿using ApiForTestOHIF.Models;
+
+namespace ApiForTestOHIF.Services
 {
     public interface IOhifService
     {
